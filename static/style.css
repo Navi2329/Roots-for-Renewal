@@ -20,7 +20,7 @@ body{
 #chk{
 	display: none;
 }
-.signup{
+.login{
 	position: relative;
 	width:100%;
 	height: 100%;
@@ -67,25 +67,25 @@ button{
 button:hover{
 	background: #964B00;
 }
-.login{
+.signup{
 	height: 460px;
 	background-image: linear-gradient(to right, #43e97b 0%, #38f9d7 100%);
 	border-radius: 60% / 10%;
 	transform: translateY(-180px);
 	transition: .8s ease-in-out;
 }
-.login label{
+.signup label{
 	color:#eee;
 	transform: scale(.6);
 }
 
-#chk:checked ~ .login{
+#chk:checked ~ .signup{
 	transform: translateY(-500px);
 }
-#chk:checked ~ .login label{
+#chk:checked ~ .signup label{
 	transform: scale(1);	
 }
-#chk:checked ~ .signup label{
+#chk:checked ~ .login label{
 	transform: scale(.6);
 }
 

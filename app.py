@@ -13,7 +13,7 @@ mysql = MySQL(app)
 
 @app.route('/', methods=['GET', 'POST'])
 def hello():
-    return render_template('index.html')
+    return render_template('login.html')
 
 @app.route('/form_signup', methods=['GET', 'POST'])
 def index():
@@ -21,15 +21,18 @@ def index():
         username = request.form['txt']
         email = request.form['email']
         password = request.form['pswd']
-
         cur = mysql.connection.cursor()
+        cur.execute("SELECT * FROM users WHERE email = %s", (email,))
+        user = cur.fetchone()
+        if user:
+            return render_template('login.html', login_error="Email already exists")
         cur.execute("INSERT INTO users (username, email, password) VALUES (%s, %s, %s)", (username, email, password))
         mysql.connection.commit()
         cur.close()
 
         return redirect('/form_login')
-    
-    return render_template('index.html')
+
+    return render_template('login.html', signup_error="")
 
 @app.route('/form_login', methods=['GET', 'POST'])
 def login():
@@ -43,11 +46,12 @@ def login():
         cur.close()
 
         if user and user[2] == password:
-            return render_template('home.html')  # Render home.html after successful login
+            return render_template('home.html')  
         else:
-            return "Invalid email or password"
+            return render_template('login.html', login_error="Password and email do not match")
 
-    return render_template('index.html')
+    return render_template('login.html', login_error="")
+
 
 @app.route('/logout')
 def logout():
