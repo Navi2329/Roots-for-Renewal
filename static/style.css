@@ -1,4 +1,4 @@
-body{
+body {
 	margin: 0;
 	padding: 0;
 	display: flex;
@@ -8,7 +8,8 @@ body{
 	font-family: 'Jost', sans-serif;
 	background: linear-gradient(315deg, #20bf55 0%, #01baef 74%);
 }
-.main{
+
+.main {
 	width: 350px;
 	height: 500px;
 	background: red;
@@ -17,15 +18,23 @@ body{
 	border-radius: 10px;
 	box-shadow: 5px 20px 50px #000;
 }
-#chk{
+
+#chk {
 	display: none;
 }
-.login{
+
+.error {
+	color: red;
+	margin-top: 10px;
+}
+
+.login {
 	position: relative;
-	width:100%;
+	width: 100%;
 	height: 100%;
 }
-label{
+
+label {
 	color: #fff;
 	font-size: 2.3em;
 	justify-content: center;
@@ -35,7 +44,8 @@ label{
 	cursor: pointer;
 	transition: .5s ease-in-out;
 }
-input{
+
+input {
 	width: 60%;
 	height: 20px;
 	background: #e0dede;
@@ -47,7 +57,8 @@ input{
 	outline: none;
 	border-radius: 5px;
 }
-button{
+
+button {
 	width: 60%;
 	height: 40px;
 	margin: 10px auto;
@@ -64,28 +75,32 @@ button{
 	transition: .2s ease-in;
 	cursor: pointer;
 }
-button:hover{
+
+button:hover {
 	background: #964B00;
 }
-.signup{
+
+.signup {
 	height: 460px;
 	background-image: linear-gradient(to right, #43e97b 0%, #38f9d7 100%);
 	border-radius: 60% / 10%;
 	transform: translateY(-180px);
 	transition: .8s ease-in-out;
 }
-.signup label{
-	color:#eee;
+
+.signup label {
+	color: #eee;
 	transform: scale(.6);
 }
 
-#chk:checked ~ .signup{
+#chk:checked~.signup {
 	transform: translateY(-500px);
 }
-#chk:checked ~ .signup label{
-	transform: scale(1);	
-}
-#chk:checked ~ .login label{
-	transform: scale(.6);
+
+#chk:checked~.signup label {
+	transform: scale(1);
 }
 
+#chk:checked~.login label {
+	transform: scale(.6);
+}
