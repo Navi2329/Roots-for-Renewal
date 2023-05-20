@@ -14,11 +14,11 @@ mysql = MySQL(app)
 
 @app.route('/', methods=['GET', 'POST'])
 def hello():
-    return render_template('login.html')
+    return render_template('Landing_Final.html')
 
 
 @app.route('/form_signup', methods=['GET', 'POST'])
-def index():
+def signup():
     if request.method == 'POST':
         username = request.form['txt']
         email = request.form['email']
@@ -52,14 +52,17 @@ def login():
         if user and user[2] == password:
             return render_template('home.html')
         else:
-            return render_template('login.html', login_error="Password and email do not match")
+            if user and user[2] != password:
+                return render_template('login.html', login_error="Password and email do not match")
+            else:
+                return render_template('login.html', login_error="Email Does not exist. Please signup to continue")
 
     return render_template('login.html', login_error="")
 
 
 @app.route('/logout')
 def logout():
-    return redirect('/')
+    return redirect('/form_login')
 
 
 if __name__ == '__main__':
