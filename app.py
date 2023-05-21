@@ -1,12 +1,12 @@
 import json
-from flask import Flask, render_template, request, redirect, session
+from flask import Flask, jsonify, render_template, request, redirect, session
 from flask_mysqldb import MySQL
 
 app = Flask(__name__, static_folder='static')
 app.secret_key = 'h#3gR52m$Pq56wJ@v^*8x4p$^Sb5&vK9'
 
 
-app.config['MYSQL_HOST'] = '192.168.0.105'
+app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = 'lotus@123'
 app.config['MYSQL_DB'] = 'authentication'
@@ -16,7 +16,7 @@ mysql = MySQL(app)
 
 @app.route('/', methods=['GET', 'POST'])
 def hello():
-    return render_template('Landing_Final.html')
+    return render_template('landing_Final.html')
 
 
 @app.route('/form_signup', methods=['GET', 'POST'])
@@ -65,8 +65,9 @@ def login():
 
 @app.route('/logout')
 def logout():
-    session.pop('email', None) 
+    session.pop('email', None)
     return redirect('/form_login')
+
 
 @app.route('/functional')
 def index():
@@ -83,11 +84,12 @@ def index():
             plantData[type] = {}
         if variety not in plantData[type]:
             plantData[type][variety] = {}
-        
+
         if place not in plantData[type][variety]:
             plantData[type][variety][place] = []
         plantData[type][variety][place].append(plant)
     return render_template('functional.html', plantData=json.dumps(plantData))
+
 
 @app.route('/save_plant', methods=['POST'])
 def save_plant():
@@ -115,6 +117,33 @@ def save_plant():
         cur.close()
         return 'Plant data saved successfully'
     return 'Invalid request method', 400
+
+
+@app.route("/history")
+def history():
+    cursor = mysql.connection.cursor()
+    cursor.execute(
+        "SELECT id,type,variety,place,plant FROM user_plants WHERE email = %s", (session.get('email'),))
+    plants = []
+    for row in cursor.fetchall():
+        plants.append({
+            "id": row[0],
+            'type': row[1],
+            'variety': row[2],
+            'place': row[3],
+            'plant': row[4]
+        })
+    cursor.close()
+    return render_template("history.html", plants=plants)
+
+
+@app.route('/delete/<int:plant_id>', methods=['POST'])
+def delete(plant_id):
+    cur = mysql.connection.cursor()
+    cur.execute("DELETE FROM user_plants WHERE id = %s", (plant_id,))
+    mysql.connection.commit()
+    cur.close()
+    return jsonify({'message': 'Success'})
 
 
 if __name__ == '__main__':

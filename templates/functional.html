@@ -79,6 +79,12 @@
       width: calc(50% - 20px);
       height: calc(50% - 20px);
     }
+
+    #historyButton {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
   </style>
 </head>
 
@@ -91,26 +97,26 @@
           <label for="type">Type of Plant:</label>
           <select class="form-control" id="type" name="type">
             <option value="" disabled selected>Select</option>
-            <option value="flowering">Flowering</option>
-            <option value="non-flowering">Non-flowering</option>
+            <option value="Flowering">Flowering</option>
+            <option value="Non-Flowering">Non-flowering</option>
           </select>
         </div>
         <div class="form-group">
           <label for="variety">Variety of Plant:</label>
           <select class="form-control" id="variety" name="variety">
             <option value="" disabled selected>Select</option>
-            <option value="vegetables">Vegetables</option>
-            <option value="fruits">Fruits</option>
+            <option value="Vegetables">Vegetables</option>
+            <option value="Fruits">Fruits</option>
           </select>
         </div>
         <div class="form-group">
           <label for="place">Place:</label>
           <select class="form-control" id="place" name="place">
             <option value="" disabled selected>Select</option>
-            <option value="desk">Desk</option>
-            <option value="balcony">Balcony</option>
-            <option value="backyard">Backyard</option>
-            <option value="roof-top">Roof Top</option>
+            <option value="Desk">Desk</option>
+            <option value="Balcony">Balcony</option>
+            <option value="Backdoor">Backyard</option>
+            <option value="Rooftop">Roof Top</option>
           </select>
         </div>
         <div class="submit-btn">
@@ -126,9 +132,19 @@
       </div>
     </div>
     <div class="plant-container" id="plantContainer"></div>
+    <div class="plant-container" id="plantContainer">
+      <button id="historyButton" class="btn btn-primary" onclick="redirectToHistory()">History</button>
+    </div>
+
   </div>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script>
+    function redirectToHistory() {
+      window.location.href = "/history";
+    }
+  </script>
+
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       var plantForm = document.getElementById("plantForm");
