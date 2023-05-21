@@ -58,27 +58,27 @@
     }
 
     .plant-container {
-  flex: 1;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  align-items: flex-start;
-  flex-direction: row;
-  gap: 10px;
-}
+      flex: auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      align-items: flex-start;
+      gap: 10px;
+    }
 
-.plant-tile {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #fff;
-  border: 2px solid #000;
-  border-radius: 5px;
-  margin-bottom: 10px;
-  padding: 10px;
-  width: calc(50% - 20px);
-  height: calc(50% - 20px);
-}
+    .plant-tile {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: darkgreen;
+      opacity: 1;
+      border: 2px solid #000;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      padding: 10px;
+      width: calc(50% - 20px);
+      height: calc(50% - 20px);
+    }
   </style>
 </head>
 
@@ -132,7 +132,7 @@
     </div>
     <div class="plant-container" id="plantContainer"></div>
   </div>
-
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
   <script>
     document.addEventListener("DOMContentLoaded", function () {
@@ -140,36 +140,7 @@
       var historyData = [];
       var plantCount = 0;
 
-      var plantData = {
-        flowering: {
-          vegetables: {
-            desk: ["Tomato", "Lettuce"],
-            balcony: ["Carnation", "Petunia"],
-            backyard: ["Rose", "Lily"],
-            "roof-top": ["Marigold", "Geranium"]
-          },
-          fruits: {
-            desk: ["Strawberry", "Blueberry"],
-            balcony: ["Hibiscus", "Begonia"],
-            backyard: ["Apple", "Orange"],
-            "roof-top": ["Grapes", "Peach"]
-          }
-        },
-        "non-flowering": {
-          vegetables: {
-            desk: ["Spinach", "Mint"],
-            balcony: ["Lettuce", "Radish"],
-            backyard: ["Cabbage", "Cucumber"],
-            "roof-top": ["Carrot", "Beetroot"]
-          },
-          fruits: {
-            desk: ["Avocado", "Lemon"],
-            balcony: ["Pomegranate", "Fig"],
-            backyard: ["Mango", "Papaya"],
-            "roof-top": ["Guava", "Kiwi"]
-          }
-        }
-      };
+      var plantData = JSON.parse('{{ plantData | safe }}');
 
       var typeSelect = document.getElementById("type");
       var varietySelect = document.getElementById("variety");
@@ -210,60 +181,71 @@
       }
 
       plantForm.addEventListener("submit", function (event) {
-  event.preventDefault();
+        event.preventDefault();
 
-  var selectedType = typeSelect.options[typeSelect.selectedIndex].text;
-  var selectedVariety = varietySelect.options[varietySelect.selectedIndex].text;
-  var selectedPlace = placeSelect.options[placeSelect.selectedIndex].text;
-  var selectedPlant = document.getElementById("selectedPlant").textContent;
+        var selectedType = typeSelect.options[typeSelect.selectedIndex].text;
+        var selectedVariety = varietySelect.options[varietySelect.selectedIndex].text;
+        var selectedPlace = placeSelect.options[placeSelect.selectedIndex].text;
+        var selectedPlant = document.getElementById("selectedPlant").textContent;
 
-  if (!selectedType || !selectedVariety || !selectedPlace || !selectedPlant) {
-    alert("Please select all options before submitting.");
-    return;
-  }
+        if (!selectedType || !selectedVariety || !selectedPlace || !selectedPlant) {
+          alert("Please select all options before submitting.");
+          return;
+        }
 
-  // Check if the selected plant already exists in historyData
-  var isAlreadySelected = historyData.some(function (entry) {
-    return (
-      entry.type === selectedType &&
-      entry.variety === selectedVariety &&
-      entry.place === selectedPlace &&
-      entry.plant === selectedPlant
-    );
-  });
+        // Check if the selected plant already exists in historyData
+        var isAlreadySelected = historyData.some(function (entry) {
+          return (
+            entry.type === selectedType &&
+            entry.variety === selectedVariety &&
+            entry.place === selectedPlace &&
+            entry.plant === selectedPlant
+          );
+        });
 
-  if (isAlreadySelected) {
-    alert("The selected plant is already in the history.");
-    return;
-  }
+        if (isAlreadySelected) {
+          alert("The selected plant is already in the history.");
+          return;
+        }
 
-  var historyEntry = {
-    type: selectedType,
-    variety: selectedVariety,
-    place: selectedPlace,
-    plant: selectedPlant
-  };
+        var historyEntry = {
+          type: selectedType,
+          variety: selectedVariety,
+          place: selectedPlace,
+          plant: selectedPlant
+        };
 
-  historyData.push(historyEntry);
-  plantCount++;
+        historyData.push(historyEntry);
+        plantCount++;
 
-  var historyContainer = document.getElementById("historyContainer");
-  historyContainer.innerHTML = "";
+        var historyContainer = document.getElementById("historyContainer");
+        historyContainer.innerHTML = "";
 
-  historyData.forEach(function (entry, index) {
-    var historyEntryDiv = document.createElement("div");
-    historyEntryDiv.classList.add("history-entry");
-    historyEntryDiv.innerHTML =
-      "<p><strong>Type of Plant:</strong> " + entry.type + "</p>" +
-      "<p><strong>Variety of Plant:</strong> " + entry.variety + "</p>" +
-      "<p><strong>Place:</strong> " + entry.place + "</p>" +
-      "<p><strong>Selected Plant:</strong> " + entry.plant + "</p>";
-    historyContainer.appendChild(historyEntryDiv);
-  });
+        historyData.forEach(function (entry, index) {
+          var historyEntryDiv = document.createElement("div");
+          historyEntryDiv.classList.add("history-entry");
+          historyEntryDiv.innerHTML =
+            "<p><strong>Type of Plant:</strong> " + entry.type + "</p>" +
+            "<p><strong>Variety of Plant:</strong> " + entry.variety + "</p>" +
+            "<p><strong>Place:</strong> " + entry.place + "</p>" +
+            "<p><strong>Selected Plant:</strong> " + entry.plant + "</p>";
+          historyContainer.appendChild(historyEntryDiv);
+        });
 
-  document.getElementById("historyCount").textContent = "My Plants: " + plantCount;
-});
-
+        document.getElementById("historyCount").textContent = "My Plants: " + plantCount;
+        $.ajax({
+          url: '/save_plant',
+          type: 'POST',
+          data: JSON.stringify(historyEntry),
+          contentType: 'application/json',
+          success: function (response) {
+            console.log("Plant data saved successfully!");
+          },
+          error: function (error) {
+            console.error("Error occurred while saving plant data:", error);
+          }
+        });
+      });
     });
   </script>
 </body>
