@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <title>Login Page</title>
+   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/login.css') }}">
+   <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
+</head>
+
+<body>
+   <div class="main">
+      <input type="checkbox" id="chk" aria-hidden="true">
+      <div class="login">
+         <form action="/form_login" method="post">
+            <label for="chk" aria-hidden="true"><span class="Login_class">Login</span></label>
+            <input type="email" name="email" placeholder="Email" required="">
+            <input type="password" name="pswd" placeholder="Password" required="">
+            <button class="loginbutton">Login</button>
+            {% if login_error %}
+            <center>
+               <p class="error">{{ login_error }}</p>
+            </center>
+            {% endif %}
+         </form>
+      </div>
+      <div class="signup">
+         <form action="/form_signup" method="post">
+            <label for="chk" aria-hidden="true">Sign up</label>
+            <input type="text" name="txt" placeholder="User name" required="">
+            <input type="email" name="email" placeholder="Email" required="">
+            <input type="password" name="pswd" placeholder="Password" required="">
+            <button class="signupbutton">Sign up</button>
+         </form>
+      </div>
+   </div>
+</body>
+
+</html>
