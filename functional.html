@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plant Information</title>
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <style>
+    body {
+      background-color: #378b29;
+      background-image: linear-gradient(315deg, #378b29 0%, #74d680 74%);
+      padding-top: 50px;
+    }
+
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .code-box {
+      background-color: #f7f7f7;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+      margin-bottom: 30px;
+    }
+
+    .submit-btn {
+      display: flex;
+      justify-content: center;
+    }
+    
+    .history-entry {
+      background-color: #f7f7f7;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1 >Plant Information</h1>
+    <form id="plantForm">
+      <div class="form-group">
+        <label for="type">Type of Plant:</label>
+        <select class="form-control" id="type" name="type">
+          <option value="flowering">Flowering</option>
+          <option value="non-flowering">Non-flowering</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="variety">Variety of Plant:</label>
+        <select class="form-control" id="variety" name="variety">
+          <option value="vegetables">Vegetables</option>
+          <option value="fruits">Fruits</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="place">Place:</label>
+        <select class="form-control" id="place" name="place">
+          <option value="desk">Desk</option>
+          <option value="balcony">Balcony</option>
+          <option value="backyard">Backyard</option>
+          <option value="roof-top">Roof Top</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="plant">Available Plants:</label>
+        <select class="form-control" id="plant" name="plant"></select>
+      </div>
+      <div class="submit-btn">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </form>
+    <div class="code-box">
+      <h2>Selected Options:</h2>
+      <p><strong>Type of Plant:</strong> <span id="selectedType"></span></p>
+      <p><strong>Variety of Plant:</strong> <span id="selectedVariety"></span></p>
+      <p><strong>Place:</strong> <span id="selectedPlace"></span></p>
+      <p><strong>Selected Plant:</strong> <span id="selectedPlant"></span></p>
+    </div>
+    <div class="history">
+      <h2>History</h2>
+      <p id="historyCount">My Plants: 0</p>
+      <div id="historyContainer"></div>
+    </div>
+  </div>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      var plantForm = document.getElementById("plantForm");
+      var historyData = [];
+      var plantCount = 0;
+
+      var plantData = {
+        flowering: {
+          vegetables: {
+            desk: ["Tomato", "Lettuce"],
+            balcony: ["Carnation", "Petunia"],
+            backyard: ["Rose", "Lily"],
+            "roof-top": ["Marigold", "Geranium"]
+          },
+          fruits: {
+            desk: ["Strawberry", "Blueberry"],
+            balcony: ["Hibiscus", "Begonia"],
+            backyard: ["Apple", "Orange"],
+            "roof-top": ["Grapes", "Peach"]
+          }
+        },
+        "non-flowering": {
+          vegetables: {
+            desk: ["Spinach", "Mint"],
+            balcony: ["Lettuce", "Radish"],
+            backyard: ["Cabbage", "Cucumber"],
+            "roof-top": ["Carrot", "Beetroot"]
+          },
+          fruits: {
+            desk: ["Avocado", "Lemon"],
+            balcony: ["Pomegranate", "Fig"],
+            backyard: ["Mango", "Papaya"],
+            "roof-top": ["Guava", "Kiwi"]
+          }
+        }
+      };
+
+      var typeSelect = document.getElementById("type");
+      var varietySelect = document.getElementById("variety");
+      var placeSelect = document.getElementById("place");
+      var plantSelect = document.getElementById("plant");
+
+      typeSelect.addEventListener("change", updateAvailablePlants);
+      varietySelect.addEventListener("change", updateAvailablePlants);
+      placeSelect.addEventListener("change", updateAvailablePlants);
+
+      function updateAvailablePlants() {
+        var type = typeSelect.value;
+        var variety = varietySelect.value;
+        var place = placeSelect.value;
+
+        var availablePlants = plantData[type][variety][place];
+
+        plantSelect.innerHTML = "";
+
+        if (availablePlants) {
+          for (var i = 0; i < availablePlants.length; i++) {
+            var option = document.createElement("option");
+            option.value = availablePlants[i];
+            option.textContent = availablePlants[i];
+            plantSelect.appendChild(option);
+          }
+        }
+      }
+
+      plantForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        var type = typeSelect.value;
+        var variety = varietySelect.value;
+        var place = placeSelect.value;
+        var plant = plantSelect.value;
+
+        document.getElementById("selectedType").textContent = type;
+        document.getElementById("selectedVariety").textContent = variety;
+        document.getElementById("selectedPlace").textContent = place;
+        document.getElementById("selectedPlant").textContent = plant;
+
+        var entry = document.createElement("div");
+        entry.className = "history-entry";
+        entry.innerHTML = "<p><strong>Type of Plant:</strong> " + type + "</p>" +
+          "<p><strong>Variety of Plant:</strong> " + variety + "</p>" +
+          "<p><strong>Place:</strong> " + place + "</p>" +
+          "<p><strong>Selected Plant:</strong> " + plant + "</p>";
+
+        document.getElementById("historyContainer").appendChild(entry);
+        document.getElementById("historyCount").textContent = "My Plants: " + (++plantCount);
+
+        plantForm.reset();
+      });
+    });
+  </script>
+</body>
+</html>
