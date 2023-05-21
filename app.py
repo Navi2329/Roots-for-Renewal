@@ -6,7 +6,7 @@ app = Flask(__name__, static_folder='static')
 app.secret_key = 'h#3gR52m$Pq56wJ@v^*8x4p$^Sb5&vK9'
 
 
-app.config['MYSQL_HOST'] = 'localhost'
+app.config['MYSQL_HOST'] = '192.168.0.105'
 app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = 'lotus@123'
 app.config['MYSQL_DB'] = 'authentication'
@@ -100,13 +100,22 @@ def save_plant():
         variety = plant_data.get('variety')
         place = plant_data.get('place')
         plant = plant_data.get('plant')
+
         cur = mysql.connection.cursor()
+        cur.execute("SELECT * FROM user_plants WHERE email = %s AND type = %s AND variety = %s AND place = %s AND plant = %s",
+                    (email, plant_type, variety, place, plant))
+        existing_plant = cur.fetchone()
+
+        if existing_plant:
+            return 'The selected plant already exists in your history.', 409
+
         cur.execute("INSERT INTO user_plants (email, type, variety, place, plant) VALUES (%s, %s, %s, %s, %s)",
                     (email, plant_type, variety, place, plant))
         mysql.connection.commit()
         cur.close()
         return 'Plant data saved successfully'
     return 'Invalid request method', 400
+
 
 if __name__ == '__main__':
     app.run(debug=True)

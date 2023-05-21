@@ -124,11 +124,6 @@
         <p><strong>Place:</strong> <span id="selectedPlace"></span></p>
         <p><strong>Selected Plant:</strong> <span id="selectedPlant"></span></p>
       </div>
-      <div class="history">
-        <h2>History</h2>
-        <p id="historyCount">My Plants: 0</p>
-        <div id="historyContainer"></div>
-      </div>
     </div>
     <div class="plant-container" id="plantContainer"></div>
   </div>
@@ -193,21 +188,6 @@
           return;
         }
 
-        // Check if the selected plant already exists in historyData
-        var isAlreadySelected = historyData.some(function (entry) {
-          return (
-            entry.type === selectedType &&
-            entry.variety === selectedVariety &&
-            entry.place === selectedPlace &&
-            entry.plant === selectedPlant
-          );
-        });
-
-        if (isAlreadySelected) {
-          alert("The selected plant is already in the history.");
-          return;
-        }
-
         var historyEntry = {
           type: selectedType,
           variety: selectedVariety,
@@ -215,24 +195,6 @@
           plant: selectedPlant
         };
 
-        historyData.push(historyEntry);
-        plantCount++;
-
-        var historyContainer = document.getElementById("historyContainer");
-        historyContainer.innerHTML = "";
-
-        historyData.forEach(function (entry, index) {
-          var historyEntryDiv = document.createElement("div");
-          historyEntryDiv.classList.add("history-entry");
-          historyEntryDiv.innerHTML =
-            "<p><strong>Type of Plant:</strong> " + entry.type + "</p>" +
-            "<p><strong>Variety of Plant:</strong> " + entry.variety + "</p>" +
-            "<p><strong>Place:</strong> " + entry.place + "</p>" +
-            "<p><strong>Selected Plant:</strong> " + entry.plant + "</p>";
-          historyContainer.appendChild(historyEntryDiv);
-        });
-
-        document.getElementById("historyCount").textContent = "My Plants: " + plantCount;
         $.ajax({
           url: '/save_plant',
           type: 'POST',
