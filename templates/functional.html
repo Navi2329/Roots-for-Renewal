@@ -68,16 +68,17 @@
 
     .plant-tile {
       display: flex;
-      align-items: center;
+      flex-wrap: wrap;
       justify-content: center;
-      background-color: darkgreen;
-      opacity: 1;
-      border: 2px solid #000;
-      border-radius: 5px;
-      margin-bottom: 10px;
-      padding: 10px;
-      width: calc(50% - 20px);
-      height: calc(50% - 20px);
+      background-color: #85FFBD;
+      background-image: linear-gradient(45deg, #85FFBD 0%, #FFFB7D 100%);
+
+      border-radius: 35px;
+      box-shadow: 0px 25px 40px #1687d933; 
+      border-style: none;
+      height: 90px;
+      width: 150px;
+      
     }
 
     #historyButton {
@@ -105,8 +106,8 @@
           <label for="variety">Variety of Plant:</label>
           <select class="form-control" id="variety" name="variety">
             <option value="" disabled selected>Select</option>
-            <option value="Vegetables">Vegetables</option>
-            <option value="Fruits">Fruits</option>
+            <option value="Vegetable">Vegetables</option>
+            <option value="Fruit">Fruits</option>
           </select>
         </div>
         <div class="form-group">

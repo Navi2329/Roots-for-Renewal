@@ -1,19 +1,106 @@
 body {
-    overflow: hidden;
-    margin: 0;
-    padding: 0;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
 }
 
 #video-background {
-    position: fixed;
-    top: 0.5;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: -1;
+  position: fixed;
+  top: 0.5;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
 }
 
 .navbar {
-    z-index: 1;
+  z-index: 1;
+}
+
+.buttons-plants {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  position: relative;
+}
+
+.hello {
+  background-color: green;
+  z-index: 10000;
+}
+
+.world {
+  background-color: green;
+  z-index: 100000;
+}
+
+.video-container {
+  position: relative;
+}
+
+.video-container video {
+  width: 100%;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.button-container button {
+  margin-right: 10px;
+  color: white;
+  background-color: #333;
+  border: none;
+  padding: 5px 10px;
+}
+
+.video-view {
+  position: relative;
+  width: 100%;
+  height: 700px;
+}
+
+.video-view .video {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background-color: #ccc;
+}
+
+.video-view .video-content {
+  position: absolute;
+  bottom: 15%;
+  left: 15%;
+}
+
+.video-view .video-bars {
+  position: absolute;
+  bottom: 15%;
+  right: 15%;
+}
+
+button {
+  transition-duration: 0.4s;
+  border-radius: 5%;
+  padding: 44px;
+  font-size: 24px;
+  text-align: center;
+  text-decoration: none;
+  font-weight: bold;
+  background-color: #4caf50; /* Green */
+  color: white;
+}
+
+button:hover {
+  font-weight: bold;
+  background-color: white; /* Green */
+  color: #4caf50;
 }
