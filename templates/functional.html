@@ -229,4 +229,236 @@
   </script>
 </body>
 
+=======
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plant Information</title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <style>
+    body {
+      background-color: #378b29;
+      background-image: linear-gradient(315deg, #378b29 0%, #74d680 74%);
+      padding-top: 50px;
+    }
+
+    .container {
+      display: flex;
+      justify-content: space-between;
+      margin: 0 20px;
+    }
+
+    .form-container {
+      flex: 1;
+      max-width: 400px;
+      margin-right: 20px;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .code-box {
+      background-color: #f7f7f7;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+      margin-bottom: 30px;
+    }
+
+    .submit-btn {
+      display: flex;
+      justify-content: center;
+    }
+
+    .history-entry {
+      background-color: #f7f7f7;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+    }
+
+    .plant-container {
+      flex: auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .plant-tile {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: darkgreen;
+      opacity: 1;
+      border: 2px solid #000;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      padding: 10px;
+      width: calc(50% - 20px);
+      height: calc(50% - 20px);
+    }
+
+    #historyButton {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="form-container">
+      <h1>Plant Information</h1>
+      <form id="plantForm">
+        <div class="form-group">
+          <label for="type">Type of Plant:</label>
+          <select class="form-control" id="type" name="type">
+            <option value="" disabled selected>Select</option>
+            <option value="Flowering">Flowering</option>
+            <option value="Non-Flowering">Non-flowering</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="variety">Variety of Plant:</label>
+          <select class="form-control" id="variety" name="variety">
+            <option value="" disabled selected>Select</option>
+            <option value="Vegetables">Vegetables</option>
+            <option value="Fruits">Fruits</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="place">Place:</label>
+          <select class="form-control" id="place" name="place">
+            <option value="" disabled selected>Select</option>
+            <option value="Desk">Desk</option>
+            <option value="Balcony">Balcony</option>
+            <option value="Backdoor">Backyard</option>
+            <option value="Rooftop">Roof Top</option>
+          </select>
+        </div>
+        <div class="submit-btn">
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </form>
+      <div class="code-box">
+        <h2>Selected Options:</h2>
+        <p><strong>Type of Plant:</strong> <span id="selectedType"></span></p>
+        <p><strong>Variety of Plant:</strong> <span id="selectedVariety"></span></p>
+        <p><strong>Place:</strong> <span id="selectedPlace"></span></p>
+        <p><strong>Selected Plant:</strong> <span id="selectedPlant"></span></p>
+      </div>
+    </div>
+    <div class="plant-container" id="plantContainer"></div>
+    <div class="plant-container" id="plantContainer">
+      <button id="historyButton" class="btn btn-primary" onclick="redirectToHistory()">History</button>
+    </div>
+
+  </div>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script>
+    function redirectToHistory() {
+      window.location.href = "/history";
+    }
+  </script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      var plantForm = document.getElementById("plantForm");
+      var historyData = [];
+      var plantCount = 0;
+
+      var plantData = JSON.parse('{{ plantData | safe }}');
+
+      var typeSelect = document.getElementById("type");
+      var varietySelect = document.getElementById("variety");
+      var placeSelect = document.getElementById("place");
+      var plantContainer = document.getElementById("plantContainer");
+
+      typeSelect.addEventListener("change", updateAvailablePlants);
+      varietySelect.addEventListener("change", updateAvailablePlants);
+      placeSelect.addEventListener("change", updateAvailablePlants);
+
+      function updateAvailablePlants() {
+        var type = typeSelect.value;
+        var variety = varietySelect.value;
+        var place = placeSelect.value;
+
+        var availablePlants = plantData[type][variety][place];
+
+        plantContainer.innerHTML = "";
+
+        if (availablePlants.length > 0) {
+          availablePlants.forEach(function (plant) {
+            var plantTile = document.createElement("button");
+            plantTile.classList.add("plant-tile");
+            plantTile.textContent = plant;
+            plantTile.addEventListener("click", function () {
+              document.getElementById("selectedType").textContent = type;
+              document.getElementById("selectedVariety").textContent = variety;
+              document.getElementById("selectedPlace").textContent = place;
+              document.getElementById("selectedPlant").textContent = plant;
+            });
+            plantContainer.appendChild(plantTile);
+          });
+        } else {
+          var noPlantMessage = document.createElement("div");
+          noPlantMessage.textContent = "No plants available for the selected options.";
+          plantContainer.appendChild(noPlantMessage);
+        }
+      }
+
+      plantForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        var selectedType = typeSelect.options[typeSelect.selectedIndex].text;
+        var selectedVariety = varietySelect.options[varietySelect.selectedIndex].text;
+        var selectedPlace = placeSelect.options[placeSelect.selectedIndex].text;
+        var selectedPlant = document.getElementById("selectedPlant").textContent;
+
+        if (!selectedType || !selectedVariety || !selectedPlace || !selectedPlant) {
+          alert("Please select all options before submitting.");
+          return;
+        }
+
+        var historyEntry = {
+          type: selectedType,
+          variety: selectedVariety,
+          place: selectedPlace,
+          plant: selectedPlant
+        };
+
+        $.ajax({
+          url: '/save_plant',
+          type: 'POST',
+          data: JSON.stringify(historyEntry),
+          contentType: 'application/json',
+          success: function (response) {
+            console.log("Plant data saved successfully!");
+          },
+          error: function (error) {
+            console.error("Error occurred while saving plant data:", error);
+          }
+        });
+      });
+    });
+  </script>
+</body>
+
+>>>>>>> 6c723412ae6ba4690ea95916530869e85a67c9fa
 </html>
