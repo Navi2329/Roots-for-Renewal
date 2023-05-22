@@ -38,7 +38,7 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
           <ul class="navbar-nav ms-auto">
             <li class="nav-item">
-              <a class="nav-link mx-2 active" aria-current="page" href="#"
+              <a class="nav-link mx-2 active" aria-current="page" href="/home"
                 >Home</a
               >
             </li>
@@ -62,8 +62,7 @@
                 class="dropdown-menu"
                 aria-labelledby="navbarDropdownMenuLink"
               >
-                <li><a class="dropdown-item" href="#">My Info</a></li>
-                <li><a class="dropdown-item" href="#">My Plants</a></li>
+                <li><a class="dropdown-item" href="/functional">My Plants</a></li>
                 <li><a class="dropdown-item" href="/logout">Log Out</a></li>
               </ul>
             </li>
@@ -95,10 +94,10 @@
         <source src="\static\video.mp4" type="video/mp4" />
       </video>
       <div class="video-content">
-        <button>NEW PLANTS</button>
+        <button onclick="window.location.href='/functional'">NEW PLANTS</button>
       </div>
       <div class="video-bars">
-        <button>EXISTING PLANTS</button>
+        <button onclick="window.location.href='/history'">EXISTING PLANTS</button>
       </div>
     </div>
   </body>

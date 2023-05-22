@@ -136,6 +136,10 @@ def history():
     cursor.close()
     return render_template("history.html", plants=plants)
 
+@app.route('/home')
+def home():
+    return render_template('home.html')
+
 
 @app.route('/delete/<int:plant_id>', methods=['POST'])
 def delete(plant_id):
