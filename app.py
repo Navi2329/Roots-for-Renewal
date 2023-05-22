@@ -6,10 +6,10 @@ app = Flask(__name__, static_folder='static')
 app.secret_key = 'h#3gR52m$Pq56wJ@v^*8x4p$^Sb5&vK9'
 
 
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'lotus@123'
-app.config['MYSQL_DB'] = 'authentication'
+app.config['MYSQL_HOST'] = 'sql12.freesqldatabase.com'
+app.config['MYSQL_USER'] = 'sql12620127'
+app.config['MYSQL_PASSWORD'] = 'Xp1Cy885lX'
+app.config['MYSQL_DB'] = 'sql12620127'
 
 mysql = MySQL(app)
 
@@ -110,9 +110,10 @@ def save_plant():
 
         if existing_plant:
             return 'The selected plant already exists in your history.', 409
-
-        cur.execute("INSERT INTO user_plants (email, type, variety, place, plant) VALUES (%s, %s, %s, %s, %s)",
-                    (email, plant_type, variety, place, plant))
+        cur.execute("SELECT info FROM plants where plant=%s", (plant,))
+        info = cur.fetchone()[0]
+        cur.execute("INSERT INTO user_plants (email, type, variety, place, plant,info) VALUES (%s, %s, %s, %s, %s,%s)",
+                    (email, plant_type, variety, place, plant,info))
         mysql.connection.commit()
         cur.close()
         return 'Plant data saved successfully'
@@ -123,7 +124,7 @@ def save_plant():
 def history():
     cursor = mysql.connection.cursor()
     cursor.execute(
-        "SELECT id,type,variety,place,plant FROM user_plants WHERE email = %s", (session.get('email'),))
+        "SELECT id,type,variety,place,plant,info FROM user_plants WHERE email = %s", (session.get('email'),))
     plants = []
     for row in cursor.fetchall():
         plants.append({
@@ -131,7 +132,8 @@ def history():
             'type': row[1],
             'variety': row[2],
             'place': row[3],
-            'plant': row[4]
+            'plant': row[4],
+            'info': row[5]
         })
     cursor.close()
     return render_template("history.html", plants=plants)
