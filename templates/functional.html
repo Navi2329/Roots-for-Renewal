@@ -10,7 +10,11 @@
   <style>
     body {
       background-color: #378b29;
+<<<<<<< HEAD
       background-image: url(https://images.pexels.com/photos/6427900/pexels-photo-6427900.jpeg?cs=srgb&dl=pexels-supriyadi-6427900.jpg&fm=jpg);
+=======
+      background-image: url(/static/img/functionalbg4.jpg);
+>>>>>>> e107b884e359029feb1197073522c01f81c43cd1
       background-repeat: no-repeat;
       background-size: cover;
       padding-top: 50px;
@@ -27,9 +31,12 @@
       max-width: 400px;
       margin-right: 15px;
       margin-bottom: 20px;
-      background: #8A2387;  /* fallback for old browsers */
-      background: -webkit-linear-gradient(to right, #F27121, #E94057, #8A2387);  /* Chrome 10-25, Safari 5.1-6 */
-      background: linear-gradient(to right, #F27121, #E94057, #8A2387); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+      background: #8A2387;
+      /* fallback for old browsers */
+      background: -webkit-linear-gradient(to right, #F27121, #E94057, #8A2387);
+      /* Chrome 10-25, Safari 5.1-6 */
+      background: linear-gradient(to right, #F27121, #E94057, #8A2387);
+      /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
       opacity: 0.8;
       padding: 20px;
       border-radius: 5px;
@@ -80,11 +87,11 @@
       background-color: #85FFBD;
       background-image: linear-gradient(45deg, #85FFBD 0%, #FFFB7D 100%);
       border-radius: 35px;
-      box-shadow: 0px 25px 40px #00000033; 
+      box-shadow: 0px 25px 40px #00000033;
       border-style: none;
       height: 90px;
       width: 150px;
-      
+
     }
 
     #historyButton {
@@ -95,17 +102,23 @@
       border-color: black;
     }
 
-    #ggbutton{
+    #ggbutton {
       background-color: black;
       border-color: black;
       color: white;
       border-radius: 5px;
     }
 
-    #ggbutton:hover{
+    #ggbutton:hover {
       background-color: rgb(35, 32, 32);
     }
 
+    .success-message {
+      color: green;
+      font-weight: bold;
+      margin-top: 10px;
+      text-align: center;
+    }
   </style>
 </head>
 
@@ -164,9 +177,17 @@
     function redirectToHistory() {
       window.location.href = "/history";
     }
+
   </script>
 
   <script>
+    function removeSuccessMessage() {
+      var successMessage = document.querySelector(".success-message");
+      if (successMessage) {
+        successMessage.remove();
+      }
+    }
+
     document.addEventListener("DOMContentLoaded", function () {
       var plantForm = document.getElementById("plantForm");
       var historyData = [];
@@ -239,6 +260,13 @@
           contentType: 'application/json',
           success: function (response) {
             console.log("Plant data saved successfully!");
+            var successMessage = document.createElement("p");
+            successMessage.classList.add("success-message");
+            successMessage.textContent = "Plant data saved successfully!";
+            if (successMessage){
+              plantForm.appendChild(successMessage);
+            }
+            setTimeout(removeSuccessMessage, 2000);
           },
           error: function (error) {
             console.error("Error occurred while saving plant data:", error);
