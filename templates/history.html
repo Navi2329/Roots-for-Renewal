@@ -5,13 +5,13 @@
     <title>Plant History</title>
     <style>
         body {
-            background-color: #f1f1f1;
+            background-color:#2B6512;
             font-family: Arial, sans-serif;
         }
 
         h1 {
             text-align: center;
-            color: #333;
+            color: #ffff;
         }
 
         .history-entry {
@@ -26,11 +26,15 @@
             display: flex;
             /* Added */
             align-items: center;
+            flex-wrap: wrap;
             /* Added */
+        }
+        .history-entry > *{
+            padding:1rem;
         }
 
         .history-entry:hover {
-            background-color: #f9f9f9;
+            background-color: #25a805d3;
         }
 
         .details {
@@ -48,6 +52,9 @@
 
         .details p strong {
             color: #333;
+            flex-basis: 0;
+            flex-grow: 2;
+            min-width: 70%;
         }
 
         .dropdown {
@@ -87,14 +94,18 @@
         }
 
         .image-container {
-            width: 20%;
+            width: 100%;
             margin-left: 50px;
+            flex-grow: 1;
+            flex-basis: 12rem;
         }
 
         .image-container img {
-            width: 100%;
-            border-radius: 5px;
+            display: flex;
+            width: 40%;
+            border-radius: 2px;
         }
+
     </style>
     <script>
         // JavaScript functions remain unchanged
@@ -130,8 +141,9 @@
         <!-- Updated HTML structure -->
         {% for plant in plants %}
         <div class="history-entry" id="tile-{{ plant.id }}" onclick="toggleDetails('{{ plant.id }}')">
-            <p>{{ plant.plant }}</p>
+            <p class="pname" style="">{{ plant.plant }}</p>
             <div class="details" id="details-{{ plant.id }}">
+               
                 <p><strong>Type of Plant:</strong> {{ plant.type }}</p>
                 <p><strong>Variety of Plant:</strong> {{ plant.variety }}</p>
                 <p><strong>Place:</strong> {{ plant.place }}</p>
