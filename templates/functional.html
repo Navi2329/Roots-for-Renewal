@@ -109,7 +109,7 @@
     }
 
     .success-message {
-      color: green;
+      color: black;
       font-weight: bold;
       margin-top: 10px;
       text-align: center;
@@ -261,7 +261,7 @@
             if (successMessage){
               plantForm.appendChild(successMessage);
             }
-            setTimeout(removeSuccessMessage, 2000);
+            setTimeout(removeSuccessMessage, 3000);
           },
           error: function (error) {
             console.error("Error occurred while saving plant data:", error);

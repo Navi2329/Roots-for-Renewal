@@ -5,7 +5,7 @@
     <title>Plant History</title>
     <style>
         body {
-            background-color:#2B6512;
+            background-color: black;
             font-family: Arial, sans-serif;
         }
 
@@ -29,17 +29,18 @@
             flex-wrap: wrap;
             /* Added */
         }
-        .history-entry > *{
-            padding:1rem;
+
+        .history-entry>* {
+            padding: 1rem;
         }
 
         .history-entry:hover {
-            background-color: #25a805d3;
+            background-color: #a5fa8fd3;
         }
 
         .details {
             display: none;
-            margin-top: 10px; 
+            margin-top: 10px;
             padding: 10px;
             background-color: #f9f9f9;
             border-radius: 5px;
@@ -105,7 +106,6 @@
             width: 40%;
             border-radius: 2px;
         }
-
     </style>
     <script>
         // JavaScript functions remain unchanged
@@ -141,16 +141,16 @@
         <!-- Updated HTML structure -->
         {% for plant in plants %}
         <div class="history-entry" id="tile-{{ plant.id }}" onclick="toggleDetails('{{ plant.id }}')">
-            <p class="pname" style="">{{ plant.plant }}</p>
+            <p>{{ plant.plant }}</p>
             <div class="details" id="details-{{ plant.id }}">
-               
+
                 <p><strong>Type of Plant:</strong> {{ plant.type }}</p>
                 <p><strong>Variety of Plant:</strong> {{ plant.variety }}</p>
                 <p><strong>Place:</strong> {{ plant.place }}</p>
                 <p><strong>Climate change preventive role:</strong> {{ plant.info }}</p>
             </div>
             <div class="image-container">
-                <img src="https://wallpaperaccess.com/full/1922833.jpg" alt="{{ plant.plant }}">
+                <img src="{{ plant.img }}" alt="{{ plant.plant }}">
             </div>
             <div class="dropdown" id="dropdown-{{ plant.id }}" onclick="toggleDropdown('{{ plant.id }}')">
                 <div class="dropdown-content">
