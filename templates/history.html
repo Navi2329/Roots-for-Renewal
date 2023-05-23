@@ -23,6 +23,10 @@
             cursor: pointer;
             transition: background-color 0.3s ease;
             position: relative;
+            display: flex;
+            /* Added */
+            align-items: center;
+            /* Added */
         }
 
         .history-entry:hover {
@@ -81,8 +85,19 @@
         .dropdown.active .dropdown-content {
             display: block;
         }
+
+        .image-container {
+            width: 20%;
+            margin-left: 50px;
+        }
+
+        .image-container img {
+            width: 100%;
+            border-radius: 5px;
+        }
     </style>
     <script>
+        // JavaScript functions remain unchanged
         function toggleDetails(id) {
             var detailsElement = document.getElementById("details-" + id);
             var displayValue = window.getComputedStyle(detailsElement).display;
@@ -112,6 +127,7 @@
 <body>
     <h1>Plant History</h1>
     <div id="historyContainer">
+        <!-- Updated HTML structure -->
         {% for plant in plants %}
         <div class="history-entry" id="tile-{{ plant.id }}" onclick="toggleDetails('{{ plant.id }}')">
             <p>{{ plant.plant }}</p>
@@ -120,6 +136,9 @@
                 <p><strong>Variety of Plant:</strong> {{ plant.variety }}</p>
                 <p><strong>Place:</strong> {{ plant.place }}</p>
                 <p><strong>Climate change preventive role:</strong> {{ plant.info }}</p>
+            </div>
+            <div class="image-container">
+                <img src="https://wallpaperaccess.com/full/1922833.jpg" alt="{{ plant.plant }}">
             </div>
             <div class="dropdown" id="dropdown-{{ plant.id }}" onclick="toggleDropdown('{{ plant.id }}')">
                 <div class="dropdown-content">
