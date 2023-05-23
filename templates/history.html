@@ -24,10 +24,8 @@
             transition: background-color 0.3s ease;
             position: relative;
             display: flex;
-            /* Added */
             align-items: center;
             flex-wrap: wrap;
-            /* Added */
         }
 
         .history-entry>* {
@@ -108,7 +106,6 @@
         }
     </style>
     <script>
-        // JavaScript functions remain unchanged
         function toggleDetails(id) {
             var detailsElement = document.getElementById("details-" + id);
             var displayValue = window.getComputedStyle(detailsElement).display;
@@ -138,7 +135,6 @@
 <body>
     <h1>Plant History</h1>
     <div id="historyContainer">
-        <!-- Updated HTML structure -->
         {% for plant in plants %}
         <div class="history-entry" id="tile-{{ plant.id }}" onclick="toggleDetails('{{ plant.id }}')">
             <p>{{ plant.plant }}</p>

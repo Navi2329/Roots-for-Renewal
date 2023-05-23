@@ -76,17 +76,19 @@
     }
 
     .plant-tile {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    background-color: black; /* Optional: You can remove this line if you want a transparent background */
-    color: white; /* Set the text color to white */
-    box-shadow: 0px 25px 40px #00000033;
-    opacity: 0.8;
-    border-style: none;
-    height: 90px;
-    width: 150px;
-  }
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+      background-color: black;
+      color: white;
+      box-shadow: 0px 25px 40px #00000033;
+      opacity: 0.8;
+      border-style: none;
+      height: 90px;
+      width: 150px;
+      align-items: center;
+      text-align: center;
+    }
 
     #historyButton {
       position: absolute;
@@ -148,7 +150,7 @@
           </select>
         </div>
         <div class="submit-btn">
-          <button type="submit" id="ggbutton">Submit</button>
+          <button type="submit" id="ggbutton">Add to Virtual Nursery</button>
         </div>
       </form>
       <div class="code-box">
@@ -161,7 +163,7 @@
     </div>
     <div class="plant-container" id="plantContainer"></div>
     <div class="plant-container" id="plantContainer">
-      <button id="historyButton" class="btn btn-primary" onclick="redirectToHistory()">My plant haul</button>
+      <button id="historyButton" class="btn btn-primary" onclick="redirectToHistory()">My Virtual Nursery</button>
     </div>
 
   </div>
@@ -257,7 +259,7 @@
             var successMessage = document.createElement("p");
             successMessage.classList.add("success-message");
             successMessage.textContent = "Plant data saved successfully!";
-            if (successMessage){
+            if (successMessage) {
               plantForm.appendChild(successMessage);
             }
             setTimeout(removeSuccessMessage, 3000);
