@@ -1,211 +1,167 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <title>Landing</title>
-    <meta name="description" content="Your Virtual Gardener" />
-    <link href="https://rsms.me/inter/inter-ui.css" rel="stylesheet" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='css/default.css') }}"
-      id="theme-color"
-    />
-  </head>
 
-  <body>
-    <section class="smart-scroll">
-      <div class="container-fluid">
-        <nav class="navbar navbar-expand-md navbar-dark">
-          <a class="navbar-brand heading-black" href="/"> Roots For Renewal </a>
-          <button
-            class="navbar-toggler navbar-toggler-right border-0"
-            type="button"
-            data-toggle="collapse"
-            data-target="#navbarCollapse"
-            aria-controls="navbarCollapse"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span data-feather="grid"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav ml-auto">
-              <li class="nav-item">
-                <a
-                  href="https://github.com/Navi2329/Roots-for-Renewal"
-                  target="_blank"
-                  >Project</a
-                >
-              </li>
-              <li class="nav-item">
-                <a href="https://linktr.ee/Team_RFR" target="_blank"
-                  >Contact Us</a
-                >
-              </li>
-            </ul>
-          </div>
-        </nav>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <title>Landing</title>
+  <meta name="description" content="Your Virtual Gardener" />
+  <link href="https://rsms.me/inter/inter-ui.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/default.css') }}" id="theme-color" />
+</head>
+
+<body>
+  <section class="smart-scroll">
+    <div class="container-fluid">
+      <nav class="navbar navbar-expand-md navbar-dark">
+        <a class="navbar-brand heading-black" href="/"> Roots For Renewal </a>
+        <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse"
+          data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false"
+          aria-label="Toggle navigation">
+          <span data-feather="grid"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a href="https://github.com/Navi2329/Roots-for-Renewal" target="_blank">Project</a>
+            </li>
+            <li class="nav-item">
+              <a href="https://linktr.ee/Team_RFR" target="_blank">Contact Us</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </section>
+
+  <section class="py-7 py-md-0 bg-hero" id="home">
+    <div class="container">
+      <div class="row vh-md-100">
+        <div class="col-md-8 col-sm-10 col-12 mx-auto my-auto text-center">
+          <h1 class="heading-black text-capitalize">Roots For Renewal</h1>
+          <p class="lead py-3">Your Virtual Gardener</p>
+          <a href="{{ url_for('login') }}" class="btn btn-primary d-inline-flex flex-row align-items-center"
+            target="_blank">
+            <em class="ml-2" data-feather="arrow-right"></em>
+            Get Started now
+          </a>
+        </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="py-7 py-md-0 bg-hero" id="home">
-      <div class="container">
-        <div class="row vh-md-100">
-          <div class="col-md-8 col-sm-10 col-12 mx-auto my-auto text-center">
-            <h1 class="heading-black text-capitalize">Roots For Renewal</h1>
-            <p class="lead py-3">Your Virtual Gardener</p>
-            <a
-              href="{{ url_for('login') }}"
-              class="btn btn-primary d-inline-flex flex-row align-items-center"
-              target="_blank"
-            >
-              <em class="ml-2" data-feather="arrow-right"></em>
-              Get Started now
-            </a>
+  <section class="pt-6 pb-7" id="features">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 mx-auto text-center">
+          <h2 class="heading-black">Our App offers everything you need.</h2>
+          <h4>
+            <p style="font-weight: bolder;">Let's Grow Together</p>
+          </h4>
+        </div>
+      </div>
+
+      <div class="row mt-6">
+        <div class="col-md-6 mr-auto">
+          <h2>Glimpse of our work</h2>
+          <p class="mb-5">Introducing our revolutionary virtual garden assistant, the ultimate solution for
+            cultivating your own thriving indoor garden. Designed with your unique home setup in mind, our
+            intelligent assistant offers unparalleled personalized suggestions to help you achieve the best
+            results. Whether you're a seasoned plant enthusiast or just beginning your green thumb journey,
+            our virtual garden assistant is here to guide you every step of the way. By analyzing factors
+            such as available space, lighting conditions, and your specific plant preferences, our assistant
+            curates a tailor-made plan, providing expert advice on plant selection, ideal watering
+            schedules, and optimal positioning for optimal growth. With its intuitive interface and seamless
+            integration with smart devices, maintaining a vibrant and healthy indoor garden has never been
+            easier. Embrace the joy of nature within your own home with our virtual garden assistant, your
+            trusted companion for cultivating a flourishing oasis tailored just for you.</p>
+        </div>
+        <div class="col-md-5">
+          <div class="slick-about">
+            <img src="static/img/loginf.png" class="img-fluid rounded d-block mx-auto" alt="Work 1">
+            <img src="static/img/home.png" class="img-fluid rounded d-block mx-auto" alt="Work 2">
+            <img src="static/img/newplant.jpg" class="img-fluid rounded d-block mx-auto" alt="Work 3">
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="pt-6 pb-7" id="features">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 mx-auto text-center">
-                    <h2 class="heading-black">Our App offers everything you need.</h2>
-                    <h4><p style="font-weight: bolder;">Let's Grow Together</p></h4>
-                </div>
-            </div>
-
-            <div class="row mt-6">
-                <div class="col-md-6 mr-auto">
-                    <h2>Glimpse of our work</h2>
-                    <p class="mb-5">Introducing our revolutionary virtual garden assistant, the ultimate solution for
-                        cultivating your own thriving indoor garden. Designed with your unique home setup in mind, our
-                        intelligent assistant offers unparalleled personalized suggestions to help you achieve the best
-                        results. Whether you're a seasoned plant enthusiast or just beginning your green thumb journey,
-                        our virtual garden assistant is here to guide you every step of the way. By analyzing factors
-                        such as available space, lighting conditions, and your specific plant preferences, our assistant
-                        curates a tailor-made plan, providing expert advice on plant selection, ideal watering
-                        schedules, and optimal positioning for optimal growth. With its intuitive interface and seamless
-                        integration with smart devices, maintaining a vibrant and healthy indoor garden has never been
-                        easier. Embrace the joy of nature within your own home with our virtual garden assistant, your
-                        trusted companion for cultivating a flourishing oasis tailored just for you.</p>
-                </div>
-                <div class="col-md-5">
-                    <div class="slick-about">
-                        <img src="static/img/loginf.png" class="img-fluid rounded d-block mx-auto" alt="Work 1">
-                        <img src="static/img/home.png" class="img-fluid rounded d-block mx-auto" alt="Work 2">
-                        <img src="static/img/newplant.jpg" class="img-fluid rounded d-block mx-auto" alt="Work 3">
-                    </div>
-                </div>
-            </div>
+  <section class="py-7 bg-dark section-angle top-right bottom-right" id="pricing">
+    <div class="container">
+      <div class="row mt-6">
+        <div class="col-md-4 mr-auto">
+          <h3>Everything is covered.</h3>
+          <p class="lead">
+            "Unleash the Green Thumb within: Let our Virtual Garden Assistant
+            Nurture Your Indoor Oasis!"
+          </p>
         </div>
-    </section>
-
-    <section
-      class="py-7 bg-dark section-angle top-right bottom-right"
-      id="pricing"
-    >
-      <div class="container">
-        <div class="row mt-6">
-          <div class="col-md-4 mr-auto">
-            <h3>Everything is covered.</h3>
-            <p class="lead">
-              "Unleash the Green Thumb within: Let our Virtual Garden Assistant
-              Nurture Your Indoor Oasis!"
-            </p>
-          </div>
-          <div class="col-md-7 offset-md-1">
-            <ul class="features-list">
-              <li>Grow in your home</li>
-              <li>Personalized recommendations</li>
-              <li>Green your surroundings</li>
-              <li>Live Healthy</li>
-            </ul>
-          </div>
+        <div class="col-md-7 offset-md-1">
+          <ul class="features-list">
+            <li>Grow in your home</li>
+            <li>Personalized recommendations</li>
+            <li>Green your surroundings</li>
+            <li>Live Healthy</li>
+          </ul>
         </div>
       </div>
-    </section>
-    <footer class="py-6">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-5 mr-auto">
-                    <h5>About Project</h5>
-                    <p>Our virtual garden assistant offers personalized suggestions based on your
-                        home setup, guiding you towards cultivating a thriving indoor garden with ease.</p>
-                </div>
+    </div>
+  </section>
+  <footer class="py-6">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-5 mr-auto">
+          <h5>About Project</h5>
+          <p>Our virtual garden assistant offers personalized suggestions based on your
+            home setup, guiding you towards cultivating a thriving indoor garden with ease.</p>
+        </div>
 
-          <div class="col-sm-2">
-            <h5>Git Hub</h5>
-            <ul class="list-unstyled">
-              <li>
-                <a
-                  class="foot"
-                  href="https://github.com/Navi2329/Roots-for-Renewal"
-                  target="_blank"
-                  >Our Project</a
-                >
-              </li>
-            </ul>
-          </div>
-          <div class="col-sm-2">
-            <h5>Help</h5>
-            <ul class="list-unstyled">
-              <li>
-                <a
-                  class="foot"
-                  href="https://linktr.ee/Team_RFR"
-                  target="_blank"
-                  >Contact Us</a
-                >
-              </li>
-              <li>
-                <a
-                  class="foot"
-                  href="https://github.com/Navi2329/Roots-for-Renewal"
-                  target="_blank"
-                  >View Project,Rate us!!</a
-                >
-              </li>
-            </ul>
-          </div>
+        <div class="col-sm-2">
+          <h5>Git Hub</h5>
+          <ul class="list-unstyled">
+            <li>
+              <a class="foot" href="https://github.com/Navi2329/Roots-for-Renewal" target="_blank">Our Project</a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-sm-2">
+          <h5>Help</h5>
+          <ul class="list-unstyled">
+            <li>
+              <a class="foot" href="https://linktr.ee/Team_RFR" target="_blank">Contact Us</a>
+            </li>
+            <li>
+              <a class="foot" href="https://github.com/Navi2329/Roots-for-Renewal" target="_blank">View Project,Rate
+                us!!</a>
+            </li>
+          </ul>
         </div>
       </div>
-    </footer>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.5.0/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    </div>
+  </footer>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.5.0/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
 
-    <script>
-      $(document).ready(function () {
-        $(".slick-about").slick({
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          autoplay: true,
-          autoplaySpeed: 2000,
-          dots: true,
-          arrows: false,
-          pauseOnHover: false,
-        });
+  <script>
+    $(document).ready(function () {
+      $(".slick-about").slick({
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 2000,
+        dots: true,
+        arrows: false,
+        pauseOnHover: false,
       });
-    </script>
-  </body>
+    });
+  </script>
+</body>
+
 </html>

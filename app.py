@@ -52,7 +52,7 @@ def login():
         cur.close()
 
         if user and user[2] == password:
-            session['email'] = email  
+            session['email'] = email
             return render_template('home.html')
         else:
             if user and user[2] != password:
@@ -115,7 +115,7 @@ def save_plant():
         cur.execute("SELECT img FROM plants where plant=%s", (plant,))
         img = cur.fetchone()[0]
         cur.execute("INSERT INTO user_plants (email, type, variety, place, plant,info,img) VALUES (%s, %s, %s, %s, %s,%s,%s)",
-                    (email, plant_type, variety, place, plant,info,img))
+                    (email, plant_type, variety, place, plant, info, img))
         mysql.connection.commit()
         cur.close()
         return 'Plant data saved successfully'
@@ -140,6 +140,7 @@ def history():
         })
     cursor.close()
     return render_template("history.html", plants=plants)
+
 
 @app.route('/home')
 def home():
