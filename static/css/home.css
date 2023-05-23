@@ -77,25 +77,28 @@ body {
 
 .video-view .video-content {
   position: absolute;
-  bottom: 15%;
+  bottom: 35%;
   left: 15%;
 }
 
 .video-view .video-bars {
   position: absolute;
-  bottom: 15%;
+  bottom: 35%;
   right: 15%;
 }
 
 button {
   transition-duration: 0.4s;
+  opacity: 0.85;
   border-radius: 5%;
-  padding: 44px;
+  padding: 16px 32px;
   font-size: 24px;
   text-align: center;
   text-decoration: none;
   font-weight: bold;
   background-color: #4caf50; /* Green */
+  background-color: transparent;
+  border: 2px solid white;
   color: white;
 }
 

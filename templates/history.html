@@ -1,166 +1,178 @@
 <!DOCTYPE html>
 <html>
-
-<head>
+  <head>
     <title>Plant History</title>
     <style>
-        body {
-            background-color:#2B6512;
-            font-family: Arial, sans-serif;
-        }
+      body {
+        background-color: black;
+        font-family: Arial, sans-serif;
+      }
 
-        h1 {
-            text-align: center;
-            color: #ffff;
-        }
+      h1 {
+        text-align: center;
+        color: #ffff;
+      }
 
-        .history-entry {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            position: relative;
-            display: flex;
-            /* Added */
-            align-items: center;
-            flex-wrap: wrap;
-            /* Added */
-        }
-        .history-entry > *{
-            padding:1rem;
-        }
+      .history-entry {
+        background-color: #026349;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        position: relative;
+        display: flex;
+        /* Added */
+        align-items: center;
+        flex-wrap: wrap;
+        /* Added */
+      }
+      .history-entry > * {
+        padding: 1rem;
+      }
 
-        .history-entry:hover {
-            background-color: #25a805d3;
-        }
+      /* .history-entry:hover {
+        background-color: #25a805d3;
+      } */
 
-        .details {
-            display: none;
-            margin-top: 10px; 
-            padding: 10px;
-            background-color: #f9f9f9;
-            border-radius: 5px;
-        }
+      .details {
+        display: none;
+        margin-top: 10px;
+        padding: 10px;
+        background-color: #f9f9f9;
+        border-radius: 5px;
+      }
 
-        .details p {
-            margin: 0;
-            padding: 5px 0;
-        }
+      .details p {
+        margin: 0;
+        padding: 5px 0;
+      }
 
-        .details p strong {
-            color: #333;
-            flex-basis: 0;
-            flex-grow: 2;
-            min-width: 70%;
-        }
+      .details p strong {
+        color: #333;
+        flex-basis: 0;
+        flex-grow: 2;
+        min-width: 70%;
+      }
 
-        .dropdown {
-            font-size: 30px;
-            position: absolute;
-            top: 5px;
-            right: 10px;
-            cursor: pointer;
-        }
+      .dropdown {
+        font-size: 30px;
+        position: absolute;
+        top: 5px;
+        right: 10px;
+        cursor: pointer;
+      }
 
-        .dropdown-content {
-            font-size: 20px;
-            display: none;
-            position: absolute;
-            background-color: #f9f9f9;
-            min-width: 120px;
-            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
-            z-index: 1;
-            right: 0;
-            transform: translateY(100%);
-        }
+      .dropdown-content {
+        font-size: 20px;
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 120px;
+        box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+        z-index: 1;
+        right: 0;
+        transform: translateY(100%);
+      }
 
-        .dropdown-content a {
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-            cursor: pointer;
-        }
+      .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        cursor: pointer;
+      }
 
-        .dropdown-content a:hover {
-            background-color: #f1f1f1;
-        }
+      .dropdown-content a:hover {
+        background-color: #f1f1f1;
+      }
 
-        .dropdown.active .dropdown-content {
-            display: block;
-        }
+      .dropdown.active .dropdown-content {
+        display: block;
+      }
 
-        .image-container {
-            width: 100%;
-            margin-left: 50px;
-            flex-grow: 1;
-            flex-basis: 12rem;
-        }
+      .image-container {
+        width: 100%;
+        margin-left: 50px;
+        flex-grow: 1;
+        flex-basis: 12rem;
+      }
 
-        .image-container img {
-            display: flex;
-            width: 40%;
-            border-radius: 2px;
-        }
-
+      .image-container img {
+        display: flex;
+        width: 40%;
+        border-radius: 2px;
+      }
     </style>
     <script>
-        // JavaScript functions remain unchanged
-        function toggleDetails(id) {
-            var detailsElement = document.getElementById("details-" + id);
-            var displayValue = window.getComputedStyle(detailsElement).display;
-            detailsElement.style.display = (displayValue === "none") ? "block" : "none";
-        }
+      // JavaScript functions remain unchanged
+      function toggleDetails(id) {
+        var detailsElement = document.getElementById("details-" + id);
+        var displayValue = window.getComputedStyle(detailsElement).display;
+        detailsElement.style.display =
+          displayValue === "none" ? "block" : "none";
+      }
 
-        function toggleDropdown(id) {
-            var dropdownElement = document.getElementById("dropdown-" + id);
-            dropdownElement.classList.toggle("active");
-        }
+      function toggleDropdown(id) {
+        var dropdownElement = document.getElementById("dropdown-" + id);
+        dropdownElement.classList.toggle("active");
+      }
 
-        function deleteTile(id) {
-            fetch('/delete/' + id, { method: 'POST' })
-                .then(function (response) {
-                    if (response.ok) {
-                        var tileElement = document.getElementById("tile-" + id);
-                        tileElement.remove();
-                    }
-                })
-                .catch(function (error) {
-                    console.log('Error:', error);
-                });
-        }
+      function deleteTile(id) {
+        fetch("/delete/" + id, { method: "POST" })
+          .then(function (response) {
+            if (response.ok) {
+              var tileElement = document.getElementById("tile-" + id);
+              tileElement.remove();
+            }
+          })
+          .catch(function (error) {
+            console.log("Error:", error);
+          });
+      }
     </script>
-</head>
+  </head>
 
-<body>
-    <h1>Plant History</h1>
+  <body>
+    <h1 style="font-weight: bold">Plant History</h1>
     <div id="historyContainer">
-        <!-- Updated HTML structure -->
-        {% for plant in plants %}
-        <div class="history-entry" id="tile-{{ plant.id }}" onclick="toggleDetails('{{ plant.id }}')">
-            <p class="pname" style="">{{ plant.plant }}</p>
-            <div class="details" id="details-{{ plant.id }}">
-               
-                <p><strong>Type of Plant:</strong> {{ plant.type }}</p>
-                <p><strong>Variety of Plant:</strong> {{ plant.variety }}</p>
-                <p><strong>Place:</strong> {{ plant.place }}</p>
-                <p><strong>Climate change preventive role:</strong> {{ plant.info }}</p>
-            </div>
-            <div class="image-container">
-                <img src="https://wallpaperaccess.com/full/1922833.jpg" alt="{{ plant.plant }}">
-            </div>
-            <div class="dropdown" id="dropdown-{{ plant.id }}" onclick="toggleDropdown('{{ plant.id }}')">
-                <div class="dropdown-content">
-                    <a onclick="deleteTile('{{ plant.id }}')">Delete</a>
-                </div>
-                &#8942;
-            </div>
+      <!-- Updated HTML structure -->
+      {% for plant in plants %}
+      <div
+        class="history-entry"
+        id="tile-{{ plant.id }}"
+        onclick="toggleDetails('{{ plant.id }}')"
+      >
+        <p class="pname" style="font-weight: bold; font-size: 24px">
+          {{ plant.plant }}
+        </p>
+        <div class="details" id="details-{{ plant.id }}">
+          <p><strong>Type of Plant:</strong> {{ plant.type }}</p>
+          <p><strong>Variety of Plant:</strong> {{ plant.variety }}</p>
+          <p><strong>Place:</strong> {{ plant.place }}</p>
+          <p>
+            <strong>Climate change preventive role:</strong> {{ plant.info }}
+          </p>
         </div>
-        {% endfor %}
+        <div class="image-container">
+          <img
+            src="https://wallpaperaccess.com/full/1922833.jpg"
+            alt="{{ plant.plant }}"
+          />
+        </div>
+        <div
+          class="dropdown"
+          id="dropdown-{{ plant.id }}"
+          onclick="toggleDropdown('{{ plant.id }}')"
+        >
+          <div class="dropdown-content">
+            <a onclick="deleteTile('{{ plant.id }}')">Delete</a>
+          </div>
+          &#8942;
+        </div>
+      </div>
+      {% endfor %}
     </div>
-</body>
-
+  </body>
 </html>
