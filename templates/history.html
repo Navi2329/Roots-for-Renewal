@@ -4,7 +4,7 @@
     <title>Plant History</title>
     <style>
       body {
-        background-color: black;
+        background-color: #2b6512;
         font-family: Arial, sans-serif;
       }
 
@@ -14,7 +14,7 @@
       }
 
       .history-entry {
-        background-color: #026349;
+        background-color: #fff;
         padding: 20px;
         border-radius: 5px;
         box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
@@ -32,9 +32,9 @@
         padding: 1rem;
       }
 
-      /* .history-entry:hover {
+      .history-entry:hover {
         background-color: #25a805d3;
-      } */
+      }
 
       .details {
         display: none;
@@ -144,9 +144,7 @@
         id="tile-{{ plant.id }}"
         onclick="toggleDetails('{{ plant.id }}')"
       >
-        <p class="pname" style="font-weight: bold; font-size: 24px">
-          {{ plant.plant }}
-        </p>
+        <p class="pname" style="">{{ plant.plant }}</p>
         <div class="details" id="details-{{ plant.id }}">
           <p><strong>Type of Plant:</strong> {{ plant.type }}</p>
           <p><strong>Variety of Plant:</strong> {{ plant.variety }}</p>
