@@ -1,4 +1,4 @@
-python -m pip install --upgrade pip
+pip install --upgrade pip
 Flask==2.2.5
 Flask_MySQLdb==1.0.1
 gunicorn==20.1.0
