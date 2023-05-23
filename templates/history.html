@@ -132,7 +132,7 @@
 </head>
 
 <body>
-  <h1 style="font-weight: bold">Plant History</h1>
+  <h1 style="font-weight: bold">Virtual Nursery</h1>
   <div id="historyContainer">
     {% for plant in plants %}
     <div class="history-entry" id="tile-{{ plant.id }}" onclick="toggleDetails('{{ plant.id }}')">
@@ -148,7 +148,7 @@
         </p>
       </div>
       <div class="image-container">
-        <img src="https://wallpaperaccess.com/full/1922833.jpg" alt="{{ plant.plant }}" />
+        <img src="{{ plant.img }}" alt="{{ plant.plant }}" />
       </div>
       <div class="dropdown" id="dropdown-{{ plant.id }}" onclick="toggleDropdown('{{ plant.id }}')">
         <div class="dropdown-content">
