@@ -52,7 +52,7 @@ def login():
         cur.close()
 
         if user and user[2] == password:
-            session['email'] = email  # Store user's email in the session
+            session['email'] = email  
             return render_template('home.html')
         else:
             if user and user[2] != password:
