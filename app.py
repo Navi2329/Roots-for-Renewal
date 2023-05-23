@@ -112,8 +112,10 @@ def save_plant():
             return 'The selected plant already exists in your history.', 409
         cur.execute("SELECT info FROM plants where plant=%s", (plant,))
         info = cur.fetchone()[0]
-        cur.execute("INSERT INTO user_plants (email, type, variety, place, plant,info) VALUES (%s, %s, %s, %s, %s,%s)",
-                    (email, plant_type, variety, place, plant,info))
+        cur.execute("SELECT img FROM plants where plant=%s", (plant,))
+        img = cur.fetchone()[0]
+        cur.execute("INSERT INTO user_plants (email, type, variety, place, plant,info,img) VALUES (%s, %s, %s, %s, %s,%s,%s)",
+                    (email, plant_type, variety, place, plant,info,img))
         mysql.connection.commit()
         cur.close()
         return 'Plant data saved successfully'
@@ -124,7 +126,7 @@ def save_plant():
 def history():
     cursor = mysql.connection.cursor()
     cursor.execute(
-        "SELECT id,type,variety,place,plant,info FROM user_plants WHERE email = %s", (session.get('email'),))
+        "SELECT id,type,variety,place,plant,info,img FROM user_plants WHERE email = %s", (session.get('email'),))
     plants = []
     for row in cursor.fetchall():
         plants.append({
@@ -133,7 +135,8 @@ def history():
             'variety': row[2],
             'place': row[3],
             'plant': row[4],
-            'info': row[5]
+            'info': row[5],
+            'img': row[6],
         })
     cursor.close()
     return render_template("history.html", plants=plants)
