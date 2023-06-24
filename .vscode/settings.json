@@ -2,5 +2,7 @@
     "[python]": {
         "editor.defaultFormatter": "ms-python.autopep8"
     },
-    "python.formatting.provider": "none"
+    "python.formatting.provider": "none",
+    "appService.defaultWebAppToDeploy": "undefined/subscriptions/2b3209bf-8703-486c-9554-864b2ab80c14/resourceGroups/roots-for-renewal/providers/Microsoft.Web/sites/roots-for-renewal-rfr",
+    "appService.deploySubpath": "."
 }
